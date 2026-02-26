@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 public class Point {
     public float x;
     public double y;
@@ -8,5 +10,8 @@ public class Point {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+    public String toSvg(){
+        return String.format(Locale.ENGLISH,"<circle r=\"5\" cx=\"%f\" cy=\"%f\" fill=\"red\" />", this.x, this.y);
     }
 }

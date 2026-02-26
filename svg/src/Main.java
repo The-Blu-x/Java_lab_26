@@ -5,5 +5,6 @@ public class Main {
         point.x = 5.6F;
         point.y = 2.4F;
         System.out.println(point);
+        System.out.println(point.toSvg());
     }
 }
