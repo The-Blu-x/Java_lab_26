@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Locale;
 
 public class Polygon {
 
@@ -16,6 +17,10 @@ public class Polygon {
     }
     //<polygon points="100,10 150,190 50,190" style="fill:lime;stroke:purple;stroke-width:3" />
     public String toSvg(){
-        return "";
+        String pointString = "";
+        for (Point point: points){
+            pointString += point.getX() + "," + point.getY() + " ";
+        }
+        return String.format(Locale.ENGLISH, "<polygon points=\"%s\" style=\"fill:lime;stroke:purple;stroke-width:3\" />", pointString);
     }
 }
