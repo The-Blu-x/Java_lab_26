@@ -3,6 +3,10 @@ import java.util.Locale;
 public class Point {
     private float x;
     private float y;
+    public Point(Point p){
+        this.x=p.getX();
+        this.y=p.getY();
+    }
     public Point(float x, float y){
         this.x=x;
         this.y=y;
@@ -12,6 +16,7 @@ public class Point {
         this.x=0.0f;
         this.y=0.0f;
     }
+
 
     public void setX(float x){
         this.x=x;
@@ -33,6 +38,7 @@ public class Point {
                 ", y=" + y +
                 '}';
     }
+
     public String toSvg(){
         return String.format(Locale.ENGLISH,"<circle r=\"5\" cx=\"%f\" cy=\"%f\" fill=\"red\" />", this.x, this.y);
     }

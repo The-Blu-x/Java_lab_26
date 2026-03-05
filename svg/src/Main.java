@@ -1,17 +1,11 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        Point point = new Point();
-        point.setX(5.6F);
-        point.setY(2.4F);
-        System.out.println(point.toSvg());
-        point.translate(4.3F, 3.4F);
-        System.out.println(point.toSvg());
-        Point point3=point.translated(7.8F, 2.9F);
+        Point p1 = new Point(3, 6);
+        Point p2 = new Point(2, 7);
+        Segment s1 = new Segment(new Point(p1), p2);
 
-        Segment segment = new Segment();
-        segment.p = point;
-        segment.q = point3;
-        System.out.println(segment.length());
+        System.out.println(s1);
+        p1.setX(5);
+        System.out.println(s1);
     }
 }
