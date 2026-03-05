@@ -1,0 +1,21 @@
+import java.util.Arrays;
+
+public class Polygon {
+
+    private Point [] points;
+
+    public Polygon(Point[] points) {
+        this.points = points;
+    }
+
+    @Override
+    public String toString() {
+        return "Polygon{" +
+                "points=" + Arrays.toString(points) +
+                '}';
+    }
+    //<polygon points="100,10 150,190 50,190" style="fill:lime;stroke:purple;stroke-width:3" />
+    public String toSvg(){
+        return "";
+    }
+}

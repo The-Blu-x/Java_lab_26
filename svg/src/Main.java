@@ -1,11 +1,13 @@
 public class Main {
     public static void main(String[] args) {
-        Point p1 = new Point(3, 6);
-        Point p2 = new Point(2, 7);
-        Segment s1 = new Segment(new Point(p1), p2);
+        Point[] points = new Point[5];
+        points[0] = new Point(20.4F, 3.5F);
+        points[1] = new Point(203.2F, 34.5F);
+        points[2] = new Point(430.4F, 50.5F);
+        points[3] = new Point(26.2F, 33.7F);
+        points[4] = new Point(21.4F, 57.5F);
 
-        System.out.println(s1);
-        p1.setX(5);
-        System.out.println(s1);
+        Polygon polygon = new Polygon(points);
+        System.out.println(polygon);
     }
 }
