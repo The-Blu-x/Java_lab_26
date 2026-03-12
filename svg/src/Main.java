@@ -1,5 +1,7 @@
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Point[] points = new Point[5];
         points[0] = new Point(2.3F, 5.6F);
         points[1] = new Point(10.5F, 12.4F);
@@ -23,6 +25,6 @@ public class Main {
         //scene.addPolygon(polygon3);
         //svg.addPolygon(polygon3);
         System.out.println(scene.toSvg());
-        //zad6
+        scene.save("out.svg");
     }
 }
