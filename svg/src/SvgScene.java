@@ -1,5 +1,5 @@
 import java.util.Locale;
-
+//zad6
 public class SvgScene {
     private Polygon[] polygons=new Polygon[3];
     private int index=0;

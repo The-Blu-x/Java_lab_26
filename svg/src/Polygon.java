@@ -1,6 +1,6 @@
 import java.util.Arrays;
 import java.util.Locale;
-
+//zad6
 public class Polygon {
 
     private Point [] points;

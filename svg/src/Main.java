@@ -23,5 +23,6 @@ public class Main {
         //scene.addPolygon(polygon3);
         //svg.addPolygon(polygon3);
         System.out.println(scene.toSvg());
+        //zad6
     }
 }
