@@ -9,9 +9,9 @@ public class Main {
         points[3] = new Point(72.4F, 81.3F);
         points[4] = new Point(162.2F, 51.3F);
         Point[] points2 = new Point[3];
-        points2[0] = new Point(1.3F, 4.6F);
-        points2[1] = new Point(8.5F, 12.4F);
-        points2[2] = new Point(15.4F, 74.2F);
+        points2[0] = new Point(30.3F, 45.6F);
+        points2[1] = new Point(121.5F, 153.4F);
+        points2[2] = new Point(62.4F, 74.2F);
         Polygon polygon = new Polygon(points);
         Polygon polygon2 = new Polygon(points2);
         Polygon polygon3 = new Polygon(new Point[]{

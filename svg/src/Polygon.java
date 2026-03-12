@@ -1,13 +1,17 @@
 import java.util.Arrays;
 import java.util.Locale;
-//zad6
+
 public class Polygon {
 
     private Point [] points;
-
+    private Style style;
     public Polygon(Point[] points) {
+        this(points,new Style("transparent","black", 1.0));
+        //System.arraycopy(points, 0, this.points, 0, points.length);
+    }
+    public Polygon(Point[] points, Style style) {
         this.points=new Point[points.length];
-
+        this.style=style;
         for(int i=0; i< points.length; ++i) {
             this.points[i] = new Point(points[i]);
         }
@@ -29,6 +33,6 @@ public class Polygon {
         for (Point point: points){
             pointString.append(point.getX()).append(",").append(point.getY()).append(" ");
         }
-        return String.format(Locale.ENGLISH, "<polygon points=\"%s\" style=\"fill:lime;stroke:purple;stroke-width:3\" />", pointString);
+        return String.format(Locale.ENGLISH, "<polygon points=\"%s\" style="+style.toSvg()+"/>", pointString);
     }
 }
