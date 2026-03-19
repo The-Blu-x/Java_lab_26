@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class Main {
     public static void main(String[] args) throws IOException {
         Point[] points = new Point[5];
@@ -24,7 +22,15 @@ public class Main {
         scene.addPolygon(polygon2);
 //scene.addPolygon(polygon3);
 //svg.addPolygon(polygon3);
+        scene.addPolygon(
+                Polygon.square(new Segment(
+                                new Point(130.0f, 100.0f), new Point(100.0f, 140.0f)),
+                        new Style("red", "green", 3.0))
+        );
         System.out.println(scene.toSvg());
         scene.save("out.svg");
+        Segment segment1=new Segment(new Point(3.0f, 0.0f), new Point(0.0f, 4.0f));
+        Segment segment2=segment1.perpendicular();
+        System.out.println(segment2);
     }
 }
