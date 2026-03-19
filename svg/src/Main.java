@@ -22,8 +22,8 @@ public class Main {
         SvgScene scene=new SvgScene();
         scene.addPolygon(polygon);
         scene.addPolygon(polygon2);
-        //scene.addPolygon(polygon3);
-        //svg.addPolygon(polygon3);
+//scene.addPolygon(polygon3);
+//svg.addPolygon(polygon3);
         System.out.println(scene.toSvg());
         scene.save("out.svg");
     }

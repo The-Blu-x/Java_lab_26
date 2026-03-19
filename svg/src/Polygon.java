@@ -2,8 +2,8 @@ import java.util.Arrays;
 import java.util.Locale;
 
 public class Polygon {
-
     private Point [] points;
+
     private Style style;
     public Polygon(Point[] points) {
         this(points,new Style("transparent","black", 1.0));
@@ -11,11 +11,12 @@ public class Polygon {
     }
     public Polygon(Point[] points, Style style) {
         this.points=new Point[points.length];
+
         this.style=style;
         for(int i=0; i< points.length; ++i) {
             this.points[i] = new Point(points[i]);
         }
-        //System.arraycopy(points, 0, this.points, 0, points.length);
+//System.arraycopy(points, 0, this.points, 0, points.length);
     }
     public Polygon(Polygon p){
         this(p.points);
@@ -32,7 +33,7 @@ public class Polygon {
         StringBuilder pointString = new StringBuilder();
         for (Point point: points){
             pointString.append(point.getX()).append(",").append(point.getY()).append(" ");
-        }
+        }1
         return String.format(Locale.ENGLISH, "<polygon points=\"%s\" style="+style.toSvg()+"/>", pointString);
     }
 }
