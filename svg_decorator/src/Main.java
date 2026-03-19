@@ -8,12 +8,13 @@ public class Main {
                 new Vec2(150, 250)
         });
 
-        Polygon rectangle = new Polygon(new Vec2[]{
-                new Vec2(350, 0),
-                new Vec2(750, 0),
-                new Vec2(750, 200),
-                new Vec2(350, 200)
-        });
+        SolidFillShapeDecorator rectangle =
+                new SolidFillShapeDecorator(new Polygon(new Vec2[]{
+                        new Vec2(350, 0),
+                        new Vec2(750, 0),
+                        new Vec2(750, 200),
+                        new Vec2(350, 200)
+                }), "blue");
 
         SolidFilledPolygon pentagon = new SolidFilledPolygon(new Vec2[]{
                 new Vec2(0, 260),
@@ -23,7 +24,9 @@ public class Main {
                 new Vec2(600, 260)
         },"green");
 
-        Ellipse ellipse = new Ellipse(new Vec2(500, 700), 400, 100);
+        SolidFillShapeDecorator ellipse = new SolidFillShapeDecorator(
+                new Ellipse(new Vec2(500, 700), 400, 100),
+                "yellow");
 
         SvgScene scene = new SvgScene();
         scene.addShape(triangle);
