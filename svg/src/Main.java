@@ -18,11 +18,12 @@ public class Main {
                 new Point(5.3F, 10.6F)
         });
         SvgScene scene=new SvgScene();
-        scene.addPolygon(polygon);
-        scene.addPolygon(polygon2);
+        //scene.addShape(new Shape());
+        scene.addShape(polygon);
+        scene.addShape(polygon2);
 //scene.addPolygon(polygon3);
 //svg.addPolygon(polygon3);
-        scene.addPolygon(
+        scene.addShape(
                 Polygon.square(new Segment(
                                 new Point(130.0f, 100.0f), new Point(100.0f, 140.0f)),
                         new Style("red", "green", 3.0))

@@ -1,10 +1,9 @@
 import java.util.Arrays;
 import java.util.Locale;
 
-public class Polygon {
+public class Polygon extends Shape{
     private Point [] points;
 
-    private Style style;
     public Polygon(Point[] points) {
         this(points,new Style("transparent","black", 1.0));
         //System.arraycopy(points, 0, this.points, 0, points.length);
@@ -40,11 +39,12 @@ public class Polygon {
                 '}';
     }
     //<polygon points="100,10 150,190 50,190" style="fill:lime;stroke:purple;stroke-width:3" />
+    @Override
     public String toSvg(){
         StringBuilder pointString = new StringBuilder();
         for (Point point: points){
             pointString.append(point.getX()).append(",").append(point.getY()).append(" ");
-        }1
+        }
         return String.format(Locale.ENGLISH, "<polygon points=\"%s\" style="+style.toSvg()+"/>", pointString);
     }
 }
