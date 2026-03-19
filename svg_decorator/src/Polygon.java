@@ -27,9 +27,9 @@ public class Polygon implements Shape{
     }
 
     public String toSvg()    {
-        String pointsString = "";
+        StringBuilder pointsString = new StringBuilder();
         for(Vec2 point : points) {
-            pointsString += point.x() + "," + point.y() + " ";
+            pointsString.append(point.x()).append(",").append(point.y()).append(" ");
         }
         return String.format(Locale.ENGLISH, "<polygon points=\"%s\" />", pointsString);
     }
