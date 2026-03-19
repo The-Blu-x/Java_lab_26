@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) throws IOException {
         Point[] points = new Point[5];
@@ -19,10 +21,11 @@ public class Main {
         });
         SvgScene scene=new SvgScene();
         //scene.addShape(new Shape());
-        scene.addShape(polygon);
+        //scene.addShape(polygon);
+        scene.addShape(new Ellipse(new Point(100.0F, 100.0F), 20.0F, 50.0F, new Style("red", "blue", 3.0)));
         scene.addShape(polygon2);
-//scene.addPolygon(polygon3);
-//svg.addPolygon(polygon3);
+        //scene.addPolygon(polygon3);
+        //svg.addPolygon(polygon3);
         scene.addShape(
                 Polygon.square(new Segment(
                                 new Point(130.0f, 100.0f), new Point(100.0f, 140.0f)),
