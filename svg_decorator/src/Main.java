@@ -16,17 +16,26 @@ public class Main {
                         new Vec2(350, 200)
                 }), "blue");
 
-        SolidFilledPolygon pentagon = new SolidFilledPolygon(new Vec2[]{
-                new Vec2(0, 260),
-                new Vec2(100, 460),
-                new Vec2(300, 560),
-                new Vec2(500, 460),
-                new Vec2(600, 260)
-        },"green");
+        StrokeShapeDecorator pentagon = new StrokeShapeDecorator(
+                new SolidFilledPolygon(new Vec2[]{
+                        new Vec2(0, 260),
+                        new Vec2(100, 460),
+                        new Vec2(300, 560),
+                        new Vec2(500, 460),
+                        new Vec2(600, 260)
+                }, "green"),
+                "red", 12.0
+        );
 
-        SolidFillShapeDecorator ellipse = new SolidFillShapeDecorator(
-                new Ellipse(new Vec2(500, 700), 400, 100),
-                "yellow");
+        StrokeShapeDecorator ellipse = new StrokeShapeDecorator(
+                new SolidFillShapeDecorator(
+                        new Ellipse(
+                                new Vec2(500, 700),
+                                400,
+                                100),
+                        "yellow"),
+                "blue", 8
+        );
 
         SvgScene scene = new SvgScene();
         scene.addShape(triangle);

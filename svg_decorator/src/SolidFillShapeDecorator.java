@@ -1,5 +1,5 @@
 public class SolidFillShapeDecorator extends ShapeDecorator{
-    private String color;
+    private final String color;
 
     public SolidFillShapeDecorator(Shape decoratedShape, String color) {
         super(decoratedShape);
