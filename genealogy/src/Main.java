@@ -15,5 +15,12 @@ public class Main {
         boolean didItWorked = parent.adopt(child);
         System.out.println("Czy adopcja się powiodła? " + didItWorked);
         System.out.println(people);
+
+        Person drugieDziecko = people.get(1);
+        parent.adopt(drugieDziecko);
+
+        Person najmlodsze = parent.getYoungestChild();
+
+        System.out.println("Najmłodsze dziecko Mike'a to: " + najmlodsze);
     }
 }

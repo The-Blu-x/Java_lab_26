@@ -19,6 +19,20 @@ public class Person {
         return this.children.add(child);
     }
 
+    public Person getYoungestChild() {
+        if (this.children.isEmpty()) {
+            return null;
+        }
+        Person youngest = null;
+        for (Person child : this.children) {
+            if (youngest == null || child.birthday.isAfter(youngest.birthday)) {
+                youngest = child;
+            }
+        }
+
+        return youngest;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
