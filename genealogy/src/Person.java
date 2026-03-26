@@ -1,6 +1,5 @@
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Person implements Comparable<Person> {
     private final String firstName;
@@ -31,6 +30,12 @@ public class Person implements Comparable<Person> {
         }
 
         return youngest;
+    }
+
+    public List<Person> getChildren() {
+        List<Person> sortChildren = new ArrayList<>(this.children);
+        Collections.sort(sortChildren);
+        return sortChildren;
     }
 
     @Override
