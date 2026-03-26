@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private final String firstName;
     private final String lastName;
     private final LocalDate birthday;
@@ -25,12 +25,17 @@ public class Person {
         }
         Person youngest = null;
         for (Person child : this.children) {
-            if (youngest == null || child.birthday.isAfter(youngest.birthday)) {
+            if (youngest == null || child.compareTo(youngest) > 0) {
                 youngest = child;
             }
         }
 
         return youngest;
+    }
+
+    @Override
+    public int compareTo(Person other) {
+        return this.birthday.compareTo(other.birthday);
     }
 
     @Override
