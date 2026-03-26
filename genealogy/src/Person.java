@@ -1,26 +1,26 @@
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Person {
-    private String imie;
-    private String nazwisko;
-    private LocalDate dataUrodzin;
-    public Person(String imie, String nazwisko, LocalDate dataUrodzin) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.dataUrodzin = dataUrodzin;
+    private final String firstName;
+    private final String lastName;
+    private final LocalDate birthday;
+
+    private final Set<Person> children = new HashSet<>();
+
+    public Person(String firstName, String lastName, LocalDate birthday) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
     }
-    public String getImie() {
-        return imie;
-    }
-    public String getNazwisko() {
-        return nazwisko;
-    }
-    public LocalDate getDataUrodzin() {
-        return dataUrodzin;
+
+    public boolean adopt(Person child) {
+        return this.children.add(child);
     }
 
     @Override
     public String toString() {
-        return imie + " " + nazwisko + ", ur. " + dataUrodzin;
+        return firstName + " " + lastName + ", ur. " + birthday;
     }
 }
