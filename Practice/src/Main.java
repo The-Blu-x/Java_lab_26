@@ -1,30 +1,59 @@
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
-        // --- Zadanie 1: Style ---
-        Style redStyle = new Style("red", "black", 2.0);
-        Style greenStyle = new Style("green", "darkgreen", 5.0);
-        Style blueStyle = new Style("none", "blue", 1.0); // Przezroczysty środek
+    public static void main(String[] args) throws IOException {
+        Polygon triangle = new Polygon(new Vec2[]{
+                new Vec2(0, 0),
+                new Vec2(300, 0),
+                new Vec2(150, 250)
+        });
 
-        // --- Zadanie 1 & 4: Wielokąt (Trójkąt) ---
-        Point[] trianglePoints = { new Point(10, 10), new Point(110, 10), new Point(60, 110) };
-        Polygon triangle = new Polygon(trianglePoints, redStyle);
+        Polygon rectangle = new Polygon(new Vec2[]{
+                new Vec2(350, 0),
+                new Vec2(750, 0),
+                new Vec2(750, 200),
+                new Vec2(350, 200)
+        });
 
-        // --- Zadanie 2: Kwadrat z przekątnej (Metoda statyczna) ---
-        Segment diag = new Segment(new Point(200, 200), new Point(300, 300));
-        Polygon square = Polygon.square(diag, blueStyle);
+        Polygon pentagon = new Polygon(new Vec2[]{
+                new Vec2(0, 260),
+                new Vec2(100, 460),
+                new Vec2(300, 560),
+                new Vec2(500, 460),
+                new Vec2(600, 260)
+        });
 
-        // --- Zadanie 4: Elipsa ---
-        Ellipse ellipse = new Ellipse(new Point(400, 150), 80, 50, greenStyle);
+        // Pierwsza elipsa - bez dekoratorów
+        Shape ellipse1 = new Ellipse(new Vec2(500, 700), 400, 100);
 
-        // --- Zadanie 5 & 6: Scena i Polimorfizm ---
         SvgScene scene = new SvgScene();
-
-        // Dodajemy różne figury do tej samej metody addShape!
         scene.addShape(triangle);
-        scene.addShape(square);
-        scene.addShape(ellipse);
+        scene.addShape(rectangle);
+        scene.addShape(pentagon);
+        scene.addShape(ellipse1);
 
-        // --- Zadanie 8: Zapis do pliku ---
-        scene.save("wynik.svg");
+        // --- TEST DEKORATORÓW ---
+
+        // 1. Tworzymy drugą, bazową elipsę (używamy innej nazwy zmiennej!)
+        Shape ellipse2 = new Ellipse(new Vec2(100, 100), 50, 30);
+
+        // 2. Ozdabiamy ją kolorem (Zadanie 2)
+        // Uwaga: Twoja klasa SolidFillShapeDecorator przyjmuje (String color, Shape decoratedShape)
+        ellipse2 = new SolidFillShapeDecorator("red", ellipse2);
+
+        // 3. Ozdabiamy obramowaniem (Zadanie 3)
+        // Uwaga: Twoja klasa StrokeShapeDecorator przyjmuje (String color, double width, Shape decoratedShape)
+        ellipse2 = new StrokeShapeDecorator("blue", 2.0, (ShapeDecorator) ellipse2);
+
+        // 4. Dodajemy transformacje za pomocą Buildera (Zadanie 4)
+        ellipse2 = new TransformationDecorator.Builder()
+                .rotate(45, new Vec2(100, 100))
+                .translate(new Vec2(50, 0))
+                .build(ellipse2);
+
+        // 5. Dodajemy ozdobioną elipsę do sceny
+        scene.addShape(ellipse2);
+
+        scene.save("result.svg");
     }
 }
