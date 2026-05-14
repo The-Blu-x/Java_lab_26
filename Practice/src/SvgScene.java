@@ -2,63 +2,60 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class SvgScene {
-    private Polygon[] polygons = new Polygon[3];
-    private int index = 0; // Pomocniczy licznik
+    // Zmieniamy na Shape, aby obsługiwać różne figury jednocześnie
+    private Shape[] shapes = new Shape[3];
+    private int index = 0;
 
-    public void addPolygon(Polygon p) {
-        // 1. Wstaw wielokąt do tablicy pod aktualny index
-        polygons[index] = p;
-
-        // 2. Zwiększ index, a jeśli wyniesie 3, zresetuj go do 0
-        // Jak byś to zapisał?
-        index++;
-        if (index >= 3) {
-            index = 0;
-        }
+    // Metoda przyjmuje dowolny kształt (Polygon, Ellipse, itp.)
+    public void addShape(Shape s) {
+        shapes[index] = s;
+        index = (index + 1) % shapes.length; // Sprytny licznik (0,1,2,0...)
     }
-//    public void addPolygon(Polygon p) {
-//        polygons[index] = p;
-//        index = (index + 1) % 3; // (0+1)%3=1, (1+1)%3=2, (2+1)%3=0!
-//    }
+
     public String toSvg() {
         String result = "";
-        for (int i = 0; i < polygons.length; i++) {
-            if (polygons[i] != null) {
-                result += polygons[i].toSvg() + "\n";
+        for (Shape s : shapes) {
+            if (s != null) {
+                // Wywołuje toSvg() właściwe dla konkretnej klasy (Polygon/Ellipse)
+                result += s.toSvg() + "\n";
             }
         }
         return result;
     }
+
     public void save(String filePath) {
         double totalWidth = 0;
         double totalHeight = 0;
 
-        // 1. Szukamy maksymalnego zasięgu wszystkich wielokątów
-        for (Polygon p : polygons) {
-            if (p != null) {
-                var bbox = p.boundingBox();
-                // Sprawdzamy, gdzie kończy się dany wielokąt (start + szerokość)
-                totalWidth = Math.max(totalWidth, bbox.x() + bbox.width());
-                totalHeight = Math.max(totalHeight, bbox.y() + bbox.height());
+        for (Shape s : shapes) {
+            if (s != null) {
+                var bbox = s.boundingBox();
+                // KLUCZOWA POPRAWKA:
+                // Musimy sprawdzić, gdzie figura się KOŃCZY (pozycja + rozmiar)
+                double currentRightEdge = bbox.x() + bbox.width();
+                double currentBottomEdge = bbox.y() + bbox.height();
+
+                if (currentRightEdge > totalWidth) totalWidth = currentRightEdge;
+                if (currentBottomEdge > totalHeight) totalHeight = currentBottomEdge;
             }
         }
 
-        // 2. Składamy nagłówek, treść i stopkę SVG
-        String svgStart = String.format(
+        // Pamiętaj o Locale.US, aby uniknąć przecinków!
+        String svgStart = String.format(java.util.Locale.US,
                 "<svg width=\"%f\" height=\"%f\" xmlns=\"http://www.w3.org/2000/svg\">\n",
                 totalWidth, totalHeight
         );
-        String svgContent = toSvg();
-        String svgEnd = "</svg>";
 
-        // 3. Zapis do pliku (używamy try-with-resources, by Java sama zamknęła plik)
+        // ... reszta zapisu ...
+
+
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.write(svgStart);
-            writer.write(svgContent);
-            writer.write(svgEnd);
-            System.out.println("Plik zapisany pomyślnie w: " + filePath);
+            writer.write(toSvg());
+            writer.write("</svg>");
+            System.out.println("Sukces! Plik zapisany: " + filePath);
         } catch (IOException e) {
-            System.err.println("Błąd zapisu pliku: " + e.getMessage());
+            System.err.println("Błąd zapisu: " + e.getMessage());
         }
     }
 }

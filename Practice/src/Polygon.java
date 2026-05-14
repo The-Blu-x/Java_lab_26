@@ -1,20 +1,31 @@
-public class Polygon {
+public class Polygon extends Shape {
     private Point[] points;
 
-    public Polygon(Point[] points) {
+    public Polygon(Point[] points, Style style) {
+        super(style);
+
         this.points = new Point[points.length];
         for( int i = 0; i < points.length; i++) {
             this.points[i] = new Point(points[i]);
+        }
+
+        if (style == null) {
+            this.style = new Style("none", "black", 1.0);
+        } else {
+            this.style =style;
         }
     }
 
 //    public Polygon(Polygon other) {
 //        this.points = other.points; // To jest "płytkie" i ryzykowne
 //    }
-
-    public Polygon(Polygon other) {
-        this(other.points);
+    public Polygon(Point[] points) {
+        this(points, new Style("none", "black", 1.0));
     }
+
+//    public Polygon(Polygon other) {
+//        this(other.points);
+//    }
 
     @Override
     public String toString() {
@@ -25,14 +36,28 @@ public class Polygon {
         return result;
     }
 
+    @Override
     public String toSvg() {
         String s = "<polygon points=\"";
         for (Point p : points) {
-            // Dodajemy współrzędne w formacie x,y oraz spację po każdym punkcie
             s += p.getX() + "," + p.getY() + " ";
         }
-        s += "\" />";
+        // Korzystamy ze stylu odziedziczonego po Shape
+        s += "\" " + style.toSvg() + "/>";
         return s;
+    }
+
+    public static Polygon square(Segment diagonal, Style style) {
+        Segment perp = diagonal.perpendicular();
+
+        Point[] points = {
+                diagonal.getP1(),
+                perp.getP1(),
+                diagonal.getP2(),
+                perp.getP2()
+        };
+
+        return new Polygon(points, style);
     }
     public record BoundingBox(double x, double y, double width, double height) {}
 
