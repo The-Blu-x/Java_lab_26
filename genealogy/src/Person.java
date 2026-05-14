@@ -5,13 +5,28 @@ public class Person implements Comparable<Person> {
     private final String firstName;
     private final String lastName;
     private final LocalDate birthday;
+    private final LocalDate death
 
     private final Set<Person> children = new HashSet<>();
 
-    public Person(String firstName, String lastName, LocalDate birthday) {
+    public Person(String firstName, String lastName, LocalDate birthday, LocalDate death) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
+        this.death = death;
+    }
+    public Person(String firstName, String lastName, LocalDate birthday) {
+        this(firstName ,lastName, birthday, null);
+    }
+
+    public static Person formCsvLine(String line){
+        String[] columns = line.split(",");
+        String fullName = columns[0];
+        String[] name = fullName.split(" ");
+        String fname = name[0];
+        String lname = name[1];
+        String birth = columns[1];
+        String death = columns[2];
     }
 
     public boolean adopt(Person child) {
