@@ -5,11 +5,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         // Przykład: Rodzic Jan Kowalski, urodzony 1 stycznia 1980
-        Person parent = new Person("Jan", "Kowalski", LocalDate.of(1980, 1, 1));
+        Person parent = new Person("Jan", "Kowalski", LocalDate.of(1980, 1, 1), LocalDate.of(2026, 1, 2));
         // 1. Annę Kowalską (ur. 15 maja 2010)
-        Person child1 = new Person("Anna", "Kowalska", LocalDate.of(2010, 5, 15));
+        Person child1 = new Person("Anna", "Kowalska", LocalDate.of(2010, 5, 15), null);
         // 2. Piotra Kowalskiego (ur. 20 listopada 2015)
-        Person child2 = new Person("Piotr", "Kowalski", LocalDate.of(2015, 11, 20));
+        Person child2 = new Person("Piotr", "Kowalski", LocalDate.of(2015, 11, 20), null);
 
         parent.adopt(child1);
         parent.adopt(child2);
